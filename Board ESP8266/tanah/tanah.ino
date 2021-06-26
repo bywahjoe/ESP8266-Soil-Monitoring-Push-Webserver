@@ -76,7 +76,7 @@ void loop() {
   //Serial.println(mysoil);
 
   //Jika tanah basah, relay ON
-  if(mysoil<tanah_basah){
+  if(mysoil>tanah_basah){
     myrelay=1;
     relayON();
   }else{
@@ -147,6 +147,7 @@ long getJarak() {
 
 //LCD
 void tampil() {
+  String status_tanah="Kering";
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Soil Level:");
@@ -163,6 +164,11 @@ void tampil() {
   lcd.setCursor(0, 0);
   lcd.print("Relay :");
   lcd.print(statusRelay(myrelay));
+  lcd.setCursor(0, 1);
+  lcd.print("Tanah :");
+  
+  if(!myrelay)status_tanah="Basah"; 
+  lcd.print(status_tanah);
   delay(800);
 }
 
